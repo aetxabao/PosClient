@@ -154,43 +154,88 @@ namespace PosClient
             }
         }
 
+        public static void ComunicacionServidor(Message mensaje)
+        {
+            Socket server = Connect();
+
+            Send(server, mensaje);
+
+            System.Console.WriteLine("....................");
+            System.Console.WriteLine(Receive(server));
+
+            Disconnect(server);
+        }
+
         public static void ChequearCorreo()
         {
+            string from;
+
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("1: Chequear correo  ");
             System.Console.WriteLine("--------------------");
             System.Console.Write("From: ");
-            string f = Console.ReadLine();
+            from = Console.ReadLine();
 
-            // TODO: Chequear Correo
+            Message chequearCorreo = new Message
+            {
+                From = from,
+                To = "0",
+                Msg = "LIST",
+                Stamp = "Client"
+            };
+
+            ComunicacionServidor(chequearCorreo);
         }
 
         public static void ObtenerMensaje()
         {
+            string from;
+            string num;
+
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("2: Obtener mensaje  ");
             System.Console.WriteLine("--------------------");
             System.Console.Write("From: ");
-            string f = Console.ReadLine();
+            from = Console.ReadLine();
             System.Console.Write("Num.: ");
-            string n = Console.ReadLine();
+            num = Console.ReadLine();
 
-            // TODO: Obtener Mensaje
+            Message obtenerMensaje = new Message
+            {
+                From = from,
+                To = "0",
+                Msg = "RETR " + num,
+                Stamp = "Client"
+            };
+
+            ComunicacionServidor(obtenerMensaje);
         }
 
         public static void EscribirMensaje()
         {
+            string from;
+            string to;
+            string msg;
+
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("3: Escribir mensaje ");
             System.Console.WriteLine("--------------------");
             System.Console.Write("From: ");
-            string f = Console.ReadLine();
+            from = Console.ReadLine();
             System.Console.Write("To: ");
-            string t = Console.ReadLine();
+            to = Console.ReadLine();
             System.Console.Write("Msg: ");
-            string m = Console.ReadLine();
+            msg = Console.ReadLine();
 
-            // TODO: Escribir Mensaje
+            Message escribirMensaje = new Message
+            {
+                From = from,
+                To = to,
+                Msg = msg,
+                Stamp = "Client"
+            };
+
+            ComunicacionServidor(escribirMensaje);
         }
 
         public static int Main(String[] args)
