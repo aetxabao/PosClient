@@ -154,7 +154,7 @@ namespace PosClient
             }
         }
 
-        public static void ChequearCorreo()
+        public static Message ChequearCorreo()
         {
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("1: Chequear correo  ");
@@ -163,9 +163,10 @@ namespace PosClient
             string f = Console.ReadLine();
 
             // TODO: Chequear Correo
+            return new Message { From = f, To = "0", Msg = "LIST " + f, Stamp = "Client" };
         }
 
-        public static void ObtenerMensaje()
+        public static Message ObtenerMensaje()
         {
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("2: Obtener mensaje  ");
@@ -176,9 +177,10 @@ namespace PosClient
             string n = Console.ReadLine();
 
             // TODO: Obtener Mensaje
+            return new Message { From = f, To = "0", Msg = "RETR " + n, Stamp = "Client" };
         }
 
-        public static void EscribirMensaje()
+        public static Message EscribirMensaje()
         {
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("3: Escribir mensaje ");
@@ -191,6 +193,7 @@ namespace PosClient
             string m = Console.ReadLine();
 
             // TODO: Escribir Mensaje
+            return new Message { From = f, To = t, Msg = m, Stamp = "Client" };
         }
 
         public static int Main(String[] args)
