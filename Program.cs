@@ -154,7 +154,7 @@ namespace PosClient
             }
         }
 
-        public static Message ChequearCorreo()
+        public static void ChequearCorreo()
         {
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("1: Chequear correo  ");
@@ -163,10 +163,15 @@ namespace PosClient
             string f = Console.ReadLine();
 
             // TODO: Chequear Correo
-            return new Message { From = f, To = "0", Msg = "LIST " + f, Stamp = "Client" };
+            Socket s = Connect();
+            Message msg = new Message { From = f, To = "0", Msg = "LIST", Stamp = "Client" };
+            Send(s, msg);
+            Message recived = Receive(s);
+            Console.WriteLine("................\n" + recived.ToString());
+            Disconnect(s);
         }
 
-        public static Message ObtenerMensaje()
+        public static void ObtenerMensaje()
         {
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("2: Obtener mensaje  ");
@@ -177,10 +182,15 @@ namespace PosClient
             string n = Console.ReadLine();
 
             // TODO: Obtener Mensaje
-            return new Message { From = f, To = "0", Msg = "RETR " + n, Stamp = "Client" };
+            Socket s = Connect();
+            Message msg = new Message { From = f, To = "0", Msg = "RETR " + n, Stamp = "Client" };
+            Send(s, msg);
+            Message recived = Receive(s);
+            Console.WriteLine("................\n" + recived.ToString());
+            Disconnect(s);
         }
 
-        public static Message EscribirMensaje()
+        public static void EscribirMensaje()
         {
             System.Console.WriteLine("--------------------");
             System.Console.WriteLine("3: Escribir mensaje ");
@@ -193,7 +203,12 @@ namespace PosClient
             string m = Console.ReadLine();
 
             // TODO: Escribir Mensaje
-            return new Message { From = f, To = t, Msg = m, Stamp = "Client" };
+            Socket s = Connect();
+            Message msg = new Message { From = f, To = t, Msg = m, Stamp = "Client" };
+            Send(s, msg);
+            Message recived = Receive(s);
+            Console.WriteLine("................\n" + recived.ToString());
+            Disconnect(s);
         }
 
         public static int Main(String[] args)
