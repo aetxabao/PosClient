@@ -163,6 +163,10 @@ namespace PosClient
             string f = Console.ReadLine();
 
             // TODO: Chequear Correo
+            Socket socket = Connect();
+            Send(socket, new Message{From = f, To = "0", Msg = "LIST", Stamp = "Client" });
+            Console.WriteLine(Receive(socket));
+            Disconnect(socket);
         }
 
         public static void ObtenerMensaje()
@@ -176,6 +180,10 @@ namespace PosClient
             string n = Console.ReadLine();
 
             // TODO: Obtener Mensaje
+            Socket socket = Connect();
+            Send(socket, new Message{From = f, To = "0", Msg = "RETR " + n, Stamp = "Client" });
+            Console.WriteLine(Receive(socket));
+            Disconnect(socket);
         }
 
         public static void EscribirMensaje()
@@ -191,11 +199,17 @@ namespace PosClient
             string m = Console.ReadLine();
 
             // TODO: Escribir Mensaje
+            Socket socket = Connect();
+            Send(socket, new Message{From = f, To = t, Msg = m, Stamp = "Client" });
+            Console.WriteLine(Receive(socket));
+            Disconnect(socket);
+            
         }
 
         public static int Main(String[] args)
         {
             ReadServerIpPort();
+            
             while (true)
             {
                 PrintOptionMenu();
