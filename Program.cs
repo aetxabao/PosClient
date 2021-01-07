@@ -180,7 +180,10 @@ namespace PosClient
             string n = Console.ReadLine();
 
             // TODO: Obtener Mensaje
-            
+            Socket s = Connect();
+            Send(s, new Message{From = f, To = "0", Msg = "RETR " + n, Stamp = "Client"});
+            Console.WriteLine(Receive(s));
+            Disconnect(s);
         }
 
         public static void EscribirMensaje()
