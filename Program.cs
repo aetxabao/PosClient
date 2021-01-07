@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace PosClient
 {
+     
     public class Message
     {
         public string From { get; set; }
@@ -131,7 +132,7 @@ namespace PosClient
             byte[] bytes = new byte[TAM];
             int bytesRec = socket.Receive(bytes);
             string xml = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-            // Console.WriteLine(xml);//Imprime el texto recibido
+            //Console.WriteLine(xml);//Imprime el texto recibido
             byte[] byteArray = Encoding.ASCII.GetBytes(xml);
             MemoryStream stream = new MemoryStream(byteArray);
             Message response = (Message)new XmlSerializer(typeof(Message)).Deserialize(stream);
@@ -163,6 +164,13 @@ namespace PosClient
             string f = Console.ReadLine();
 
             // TODO: Chequear Correo
+            Socket sk = Connect();
+            Message msg = new Message { From = f, To = "0", Msg = "LIST", Stamp = "Client" };
+            Send(sk, msg);
+            // Esperar resultado
+            string result = Receive(sk).Msg;
+            Console.WriteLine(result);
+            Disconnect(sk);
         }
 
         public static void ObtenerMensaje()
@@ -191,6 +199,13 @@ namespace PosClient
             string m = Console.ReadLine();
 
             // TODO: Escribir Mensaje
+            Socket sk = Connect();
+            Message msg = new Message { From = f, To = t, Msg = m, Stamp = "Client" };
+            Send(sk, msg);
+            // Esperar resultado
+            string result = Receive(sk).Msg;
+            Console.WriteLine(result);
+            Disconnect(sk);
         }
 
         public static int Main(String[] args)
