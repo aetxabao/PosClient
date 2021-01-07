@@ -199,7 +199,10 @@ namespace PosClient
             string m = Console.ReadLine();
 
             // TODO: Escribir Mensaje
-            
+            Socket s = Connect();
+            Send(s, new Message{From = f, To = t, Msg = m, Stamp = "Client"});
+            Console.WriteLine(Receive(s));
+            Disconnect(s);
         }
 
         public static int Main(String[] args)
