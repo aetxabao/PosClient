@@ -163,12 +163,12 @@ namespace PosClient
             string f = Console.ReadLine();
 
             // TODO: Chequear Correo
-            Message mensaje = new Message(
+            Message mensaje = new Message{
                 From = f,
                 To = "0",
                 Msg = "LIST",
                 Stamp = "Client"
-            );
+            };
 
             Socket s = Connect();
             Send(s, mensaje);
@@ -191,12 +191,12 @@ namespace PosClient
             string n = Console.ReadLine();
 
             // TODO: Obtener Mensaje
-            Message mensaje = new Message(
+            Message mensaje = new Message{
                 From = f,
                 To = "0",
-                Msg = "RETR" + n,
+                Msg = "RETR " + n,
                 Stamp = "Client"
-            );
+            };
 
             Socket s = Connect();
             Send(s, mensaje);
@@ -219,12 +219,12 @@ namespace PosClient
             string m = Console.ReadLine();
 
             // TODO: Escribir Mensaje
-            Message mensaje = new Message(
+            Message mensaje = new Message{
                 From = f,
                 To = t,
                 Msg = m,
                 Stamp = "Client"
-            );
+            };
             Socket s = Connect();
             Send(s, mensaje);
             System.Console.WriteLine("......................");
