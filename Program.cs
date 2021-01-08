@@ -172,7 +172,7 @@ namespace PosClient
 
             Socket server = Connect();
             Send(server, mensaje);
-             System.Console.WriteLine(".....................");
+            System.Console.WriteLine(".....................");
             System.Console.Write(Receive(server));
             Disconnect(server);
 
@@ -191,6 +191,19 @@ namespace PosClient
             string n = Console.ReadLine();
 
             // TODO: Obtener Mensaje
+             Message mensaje = new Message(
+                From = f,
+                To = "0",
+                Msg = "RETR" + n,
+                Stamp = "Client"
+            );
+
+            Socket server = Connect();
+            Send(server, mensaje);
+            System.Console.WriteLine("......................");
+            System.Console.Write(Receive(server));
+            Disconnect(server);
+
         }
 
         public static void EscribirMensaje()
