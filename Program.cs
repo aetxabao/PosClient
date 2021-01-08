@@ -168,8 +168,12 @@ namespace PosClient
             Message msg = new Message { From = f, To = "0", Msg = "LIST", Stamp = "Client" };
             Send(sk, msg);
             // Esperar resultado
+            System.Console.WriteLine("--------------------");
             string result = Receive(sk).Msg;
             Console.WriteLine(result);
+            System.Console.WriteLine("--------------------");
+            Console.WriteLine("\nPress ENTER to continue...");
+            Console.ReadLine();
             Disconnect(sk);
         }
 
@@ -184,6 +188,21 @@ namespace PosClient
             string n = Console.ReadLine();
 
             // TODO: Obtener Mensaje
+
+            StringBuilder sb = new StringBuilder();
+            Socket sk = Connect();
+            sb.AppendFormat("RETR {0}", n);
+
+            Message msg = new Message { From = f, To = "0", Msg = sb.ToString(), Stamp = "Client" };
+            Send(sk, msg);
+            // Esperar resultado
+            System.Console.WriteLine("---- Mensaje: {0} ----", n);
+            string result = Receive(sk).Msg;
+            Console.WriteLine(result);
+            System.Console.WriteLine("--------------------");
+            Console.WriteLine("\nPress ENTER to continue...");
+            Console.ReadLine();
+            Disconnect(sk);
         }
 
         public static void EscribirMensaje()
