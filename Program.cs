@@ -201,7 +201,7 @@ namespace PosClient
             Socket s = Connect();
             Send(s, mensaje);
             System.Console.WriteLine("......................");
-            System.Console.Write(Receive(s));
+            System.Console.Write(Receive(s) + "\n");
             Disconnect(s);
 
         }
