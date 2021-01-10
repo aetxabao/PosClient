@@ -162,7 +162,18 @@ namespace PosClient
             System.Console.Write("From: ");
             string f = Console.ReadLine();
 
-            // TODO: Chequear Correo
+            Socket scktServer = Connect();
+            
+            Message msj = new Message{
+                From = f,
+                To = "0",
+                Msg = "LIST",
+                Stamp = "Client" 
+            };
+            
+            Send(scktServer, msj);
+            System.Console.WriteLine(Receive(scktServer));
+            Disconnect(scktServer);
         }
 
         public static void ObtenerMensaje()
@@ -175,7 +186,18 @@ namespace PosClient
             System.Console.Write("Num.: ");
             string n = Console.ReadLine();
 
-            // TODO: Obtener Mensaje
+            Socket scktServer = Connect();
+
+            Message msj = new Message { 
+                 From = f,
+                 To = "0",
+                 Msg = "RETR " + n,
+                 Stamp = "Client" 
+            };
+            
+            Send(scktServer, msj);
+            System.Console.WriteLine(Receive(scktServer));
+            Disconnect(scktServer);
         }
 
         public static void EscribirMensaje()
@@ -190,7 +212,18 @@ namespace PosClient
             System.Console.Write("Msg: ");
             string m = Console.ReadLine();
 
-            // TODO: Escribir Mensaje
+            Socket scktServer = Connect();
+
+            Message msj = new Message { 
+                From = f, 
+                To = t, 
+                Msg = m, 
+                Stamp = "Client" 
+            };
+
+            Send(scktServer, msj);
+            System.Console.WriteLine(Receive(scktServer));
+            Disconnect(scktServer);
         }
 
         public static int Main(String[] args)
