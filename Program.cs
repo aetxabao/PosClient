@@ -202,8 +202,14 @@ namespace PosClient
             string t = Console.ReadLine();
             System.Console.Write("Msg: ");
             string m = Console.ReadLine();
+            System.Console.WriteLine("--------------------");
 
             // TODO: Escribir Mensaje
+              Socket socket = Connect();
+              Send(socket, new Message{From = f , To = t, Msg = m , Stamp = "Client"});
+              Console.WriteLine(Receive(socket));
+              Disconnect(socket);
+
         }
 
         public static int Main(String[] args)
