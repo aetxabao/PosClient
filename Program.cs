@@ -166,6 +166,7 @@ namespace PosClient
             Send(socket, msg);
             Message response  = Receive(socket);
             Console.WriteLine(response);
+            Disconnect(socket);
         }
 
         public static void ObtenerMensaje()
@@ -182,6 +183,7 @@ namespace PosClient
             Send(socket, msg);
             Message response  = Receive(socket);
             Console.WriteLine(response);
+            Disconnect(socket);
         }
 
         public static void EscribirMensaje()
@@ -200,6 +202,7 @@ namespace PosClient
             Send(socket, msg);
             Message response  = Receive(socket);
             Console.WriteLine(response);
+            Disconnect(socket);
         }
 
         public static int Main(String[] args)
