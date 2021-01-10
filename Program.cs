@@ -163,6 +163,11 @@ namespace PosClient
             string f = Console.ReadLine();
 
             // TODO: Chequear Correo
+            Socket S = Connect();
+            Send(s, new Message{From = f, To = "0", Msg = "LIST", Stamp = "Client" });
+            Console.WriteLine(Receive(s));
+            Disconnect(s);
+
         }
 
         public static void ObtenerMensaje()
@@ -176,6 +181,10 @@ namespace PosClient
             string n = Console.ReadLine();
 
             // TODO: Obtener Mensaje
+            Socket s = Connect();
+            Send(s, new Message{From = f, To = "0", Msg = "RETR " + n, Stamp = "Client" });
+            Console.WriteLine(Receive(s));
+            Disconnect(s);
         }
 
         public static void EscribirMensaje()
@@ -191,6 +200,10 @@ namespace PosClient
             string m = Console.ReadLine();
 
             // TODO: Escribir Mensaje
+            Socket s = Connect();
+            Send(s, new Message{From = f, To = t, Msg = m, Stamp = "Client" });
+            Console.WriteLine(Receive(s));
+            Disconnect(s);
         }
 
         public static int Main(String[] args)
